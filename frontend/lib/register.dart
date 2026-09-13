@@ -1,21 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:latihan_rpl2/main.dart';
 import 'package:latihan_rpl2/navigation.dart';
-import 'package:latihan_rpl2/register.dart';
 
-void main() {
-  runApp(MaterialApp(home: LoginPage()));
-}
-
-class LoginPage extends StatefulWidget {
-  const LoginPage({super.key});
+class RegisterPage extends StatefulWidget {
+  const RegisterPage({super.key});
 
   @override
-  State<LoginPage> createState() => _LoginPageState();
+  State<RegisterPage> createState() => _RegisterPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _RegisterPageState extends State<RegisterPage> {
   bool showPassword = false;
+  bool showConfirmPassword = false;
 
   void _goToNavigation() {
     Navigator.push(
@@ -36,7 +33,7 @@ class _LoginPageState extends State<LoginPage> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'Welcome back',
+                    'Create account',
                     style: GoogleFonts.roboto(
                       fontSize: 26,
                       fontWeight: FontWeight.bold,
@@ -44,10 +41,17 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                   const SizedBox(height: 6),
                   Text(
-                    'Login to your account to continue',
+                    'Sign up to start sharing your stories',
                     style: GoogleFonts.roboto(fontSize: 14, color: Colors.grey),
                   ),
                   const SizedBox(height: 36),
+                  TextField(
+                    decoration: const InputDecoration(
+                      labelText: 'Full Name',
+                      hintText: 'Your name',
+                    ),
+                  ),
+                  const SizedBox(height: 18),
                   TextField(
                     decoration: const InputDecoration(
                       labelText: 'Email',
@@ -59,7 +63,7 @@ class _LoginPageState extends State<LoginPage> {
                     obscureText: !showPassword,
                     decoration: InputDecoration(
                       labelText: 'Password',
-                      hintText: 'Enter your password',
+                      hintText: 'Create password',
                       suffixIcon: IconButton(
                         onPressed: () {
                           setState(() {
@@ -68,6 +72,26 @@ class _LoginPageState extends State<LoginPage> {
                         },
                         icon: Icon(
                           showPassword
+                              ? Icons.visibility_outlined
+                              : Icons.visibility_off_outlined,
+                        ),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 18),
+                  TextField(
+                    obscureText: !showConfirmPassword,
+                    decoration: InputDecoration(
+                      labelText: 'Confirm Password',
+                      hintText: 'Repeat your password',
+                      suffixIcon: IconButton(
+                        onPressed: () {
+                          setState(() {
+                            showConfirmPassword = !showConfirmPassword;
+                          });
+                        },
+                        icon: Icon(
+                          showConfirmPassword
                               ? Icons.visibility_outlined
                               : Icons.visibility_off_outlined,
                         ),
@@ -89,7 +113,7 @@ class _LoginPageState extends State<LoginPage> {
                         elevation: 0,
                       ),
                       child: Text(
-                        'Masuk',
+                        'Daftar',
                         style: GoogleFonts.roboto(
                           fontSize: 16,
                           fontWeight: FontWeight.w600,
@@ -104,12 +128,12 @@ class _LoginPageState extends State<LoginPage> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => const RegisterPage(),
+                            builder: (context) => const LoginPage(),
                           ),
                         );
                       },
                       child: Text(
-                        'Daftar',
+                        'Masuk',
                         style: GoogleFonts.roboto(
                           fontSize: 14,
                           color: const Color(0xFF4C6EF5),
