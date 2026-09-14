@@ -123,23 +123,40 @@ class _RegisterPageState extends State<RegisterPage> {
                   ),
                   const SizedBox(height: 16),
                   Center(
-                    child: TextButton(
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => const LoginPage(),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Text(
+                          'Sudah punya akun? ',
+                          style: GoogleFonts.roboto(
+                            fontSize: 14,
+                            color: Colors.black,
                           ),
-                        );
-                      },
-                      child: Text(
-                        'Masuk',
-                        style: GoogleFonts.roboto(
-                          fontSize: 14,
-                          color: const Color(0xFF4C6EF5),
-                          fontWeight: FontWeight.w600,
                         ),
-                      ),
+                        TextButton(
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => const LoginPage(),
+                              ),
+                            );
+                          },
+                          style: TextButton.styleFrom(
+                            padding: EdgeInsets.zero,
+                            minimumSize: Size.zero,
+                            tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                          ),
+                          child: Text(
+                            'masuk',
+                            style: GoogleFonts.roboto(
+                              fontSize: 14,
+                              color: const Color(0xFF4C6EF5),
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                 ],

@@ -48,18 +48,55 @@ class _LoginPageState extends State<LoginPage> {
                     style: GoogleFonts.roboto(fontSize: 14, color: Colors.grey),
                   ),
                   const SizedBox(height: 36),
-                  TextField(
-                    decoration: const InputDecoration(
+                  TextFormField(
+                    keyboardType: TextInputType.emailAddress,
+                    decoration: InputDecoration(
                       labelText: 'Email',
                       hintText: 'you@example.com',
+                      filled: true,
+                      fillColor: Colors.grey[50],
+                      contentPadding: const EdgeInsets.symmetric(
+                        horizontal: 18,
+                        vertical: 18,
+                      ),
+                      enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(14),
+                        borderSide: BorderSide(color: Colors.grey.shade300),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(14),
+                        borderSide: const BorderSide(
+                          color: Color(0xFF4C6EF5),
+                          width: 1.5,
+                        ),
+                      ),
+                      labelStyle: TextStyle(color: Colors.grey.shade600),
                     ),
                   ),
                   const SizedBox(height: 18),
-                  TextField(
+                  TextFormField(
                     obscureText: !showPassword,
                     decoration: InputDecoration(
                       labelText: 'Password',
                       hintText: 'Enter your password',
+                      filled: true,
+                      fillColor: Colors.grey[50],
+                      contentPadding: const EdgeInsets.symmetric(
+                        horizontal: 18,
+                        vertical: 18,
+                      ),
+                      enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(14),
+                        borderSide: BorderSide(color: Colors.grey.shade300),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(14),
+                        borderSide: const BorderSide(
+                          color: Color(0xFF4C6EF5),
+                          width: 1.5,
+                        ),
+                      ),
+                      labelStyle: TextStyle(color: Colors.grey.shade600),
                       suffixIcon: IconButton(
                         onPressed: () {
                           setState(() {
@@ -70,6 +107,7 @@ class _LoginPageState extends State<LoginPage> {
                           showPassword
                               ? Icons.visibility_outlined
                               : Icons.visibility_off_outlined,
+                          color: Colors.grey.shade600,
                         ),
                       ),
                     ),
@@ -99,23 +137,40 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                   const SizedBox(height: 16),
                   Center(
-                    child: TextButton(
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => const RegisterPage(),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Text(
+                          'Belum memiliki akun? ',
+                          style: GoogleFonts.roboto(
+                            fontSize: 14,
+                            color: Colors.black,
                           ),
-                        );
-                      },
-                      child: Text(
-                        'Daftar',
-                        style: GoogleFonts.roboto(
-                          fontSize: 14,
-                          color: const Color(0xFF4C6EF5),
-                          fontWeight: FontWeight.w600,
                         ),
-                      ),
+                        TextButton(
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => const RegisterPage(),
+                              ),
+                            );
+                          },
+                          style: TextButton.styleFrom(
+                            padding: EdgeInsets.zero,
+                            minimumSize: Size.zero,
+                            tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                          ),
+                          child: Text(
+                            'daftar',
+                            style: GoogleFonts.roboto(
+                              fontSize: 14,
+                              color: const Color(0xFF4C6EF5),
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                 ],
