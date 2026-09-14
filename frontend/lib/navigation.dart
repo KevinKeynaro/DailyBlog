@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'homepage.dart';
-import 'addarticle.dart';
+import 'add_article.dart';
 import 'categories.dart';
 import 'profile.dart';
-import 'searchpage.dart';
+import 'search_page.dart';
 
 class Navigation extends StatefulWidget {
   const Navigation({super.key});
@@ -15,11 +15,8 @@ class Navigation extends StatefulWidget {
 class _NavigationState extends State<Navigation> {
   int currentIndex = 0;
 
-  // GlobalKey untuk memanggil HomepageState.getArticles() dari luar,
-  // dipakai supaya list artikel refresh otomatis setelah tambah artikel baru.
   final GlobalKey<HomepageState> homepageKey = GlobalKey<HomepageState>();
 
-  // TIDAK bisa const lagi karena AddArticlePage sekarang butuh callback
   late final List<Widget> pages = [
     Homepage(key: homepageKey),
     const SearchPage(),

@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
-// Read-only: categories hanya dikelola manual lewat MySQL Workbench,
-// jadi halaman ini cuma menampilkan, tidak ada tambah/edit/hapus.
 class CategoriesPage extends StatefulWidget {
   const CategoriesPage({super.key});
 
@@ -47,7 +45,10 @@ class _CategoriesPageState extends State<CategoriesPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Categories')),
+      appBar: AppBar(
+        automaticallyImplyLeading: false,
+        title: const Text('Categories'),
+      ),
       body: isLoading
           ? const Center(child: CircularProgressIndicator())
           : RefreshIndicator(

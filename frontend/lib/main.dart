@@ -4,7 +4,7 @@ import 'package:latihan_rpl2/navigation.dart';
 import 'package:latihan_rpl2/register.dart';
 
 void main() {
-  runApp(MaterialApp(home: LoginPage()));
+  runApp(MaterialApp(debugShowCheckedModeBanner: false, home: LoginPage()));
 }
 
 class LoginPage extends StatefulWidget {

@@ -1,5 +1,11 @@
 import 'package:flutter/material.dart';
 
+String _excerpt(String text, {int maxLength = 90}) {
+  final trimmed = text.trim();
+  if (trimmed.length <= maxLength) return trimmed;
+  return '${trimmed.substring(0, maxLength).trimRight()}...';
+}
+
 class ArticleCard extends StatelessWidget {
   final String category;
   final String title;
@@ -34,7 +40,7 @@ class ArticleCard extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // ===== Header: avatar, nama user (statis), category chip, aksi =====
+            // ===== Header: avatar, user, category, aksi =====
             Row(
               children: [
                 const CircleAvatar(
@@ -82,7 +88,6 @@ class ArticleCard extends StatelessWidget {
                   ),
                 ),
 
-                // Ikon edit (pensil) - buka EditArticlePage
                 IconButton(
                   onPressed: onEdit,
                   icon: const Icon(Icons.edit_outlined, size: 20),
@@ -90,7 +95,6 @@ class ArticleCard extends StatelessWidget {
                   constraints: const BoxConstraints(),
                 ),
                 const SizedBox(width: 8),
-                // Ikon delete (sampah) - hapus artikel
                 IconButton(
                   onPressed: onDelete,
                   icon: const Icon(
@@ -106,18 +110,15 @@ class ArticleCard extends StatelessWidget {
 
             const SizedBox(height: 12),
 
-            // ===== Title (bold) =====
             Text(
               title,
               style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
             ),
             const SizedBox(height: 4),
-
-            // ===== Content =====
             Text(
-              content,
+              _excerpt(content),
               style: TextStyle(color: Colors.grey.shade800, fontSize: 14),
-              maxLines: 3,
+              maxLines: 2,
               overflow: TextOverflow.ellipsis,
             ),
           ],

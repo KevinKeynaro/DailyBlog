@@ -1,8 +1,9 @@
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'editarticle.dart';
-import 'articlecard.dart';
+import 'edit_article.dart';
+import 'article_detail.dart';
+import 'article_card.dart';
 
 class Homepage extends StatefulWidget {
   const Homepage({super.key});
@@ -11,8 +12,6 @@ class Homepage extends StatefulWidget {
   State<Homepage> createState() => HomepageState();
 }
 
-// PUBLIC (bukan _HomepageState) supaya bisa diakses dari navigation.dart
-// lewat GlobalKey<HomepageState> untuk memanggil getArticles() dari luar.
 class HomepageState extends State<Homepage> {
   List articles = [];
 
@@ -59,6 +58,14 @@ class HomepageState extends State<Homepage> {
     }
   }
 
+  Future<void> goToDetail(Map item) async {
+    final updated = await Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => ArticleDetailPage(article: item)),
+    );
+    if (updated == true) getArticles();
+  }
+
   Future<void> goToEdit(Map item) async {
     final updated = await Navigator.push(
       context,
@@ -76,7 +83,10 @@ class HomepageState extends State<Homepage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Home')),
+      appBar: AppBar(
+        automaticallyImplyLeading: false,
+        title: const Text('Home'),
+      ),
       body: RefreshIndicator(
         onRefresh: getArticles,
         child: ListView.builder(
@@ -88,7 +98,7 @@ class HomepageState extends State<Homepage> {
               category: item["category"] ?? '-',
               title: item["title"] ?? '',
               content: item["content"] ?? '',
-              onTap: () => goToEdit(item),
+              onTap: () => goToDetail(item),
               onEdit: () => goToEdit(item),
               onDelete: () => deleteArticle(item['id']),
             );
