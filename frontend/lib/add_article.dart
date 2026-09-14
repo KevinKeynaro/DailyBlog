@@ -116,42 +116,102 @@ class _AddArticlePageState extends State<AddArticlePage> {
         padding: const EdgeInsets.all(16),
         child: ListView(
           children: [
-            TextField(
-              controller: titleController,
-              decoration: const InputDecoration(labelText: 'Article title'),
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(14),
+                border: Border.all(color: Colors.grey.shade300),
+              ),
+              child: TextField(
+                controller: titleController,
+                decoration: const InputDecoration(
+                  border: InputBorder.none,
+                  labelText: 'Article title',
+                  floatingLabelBehavior: FloatingLabelBehavior.auto,
+                ),
+              ),
             ),
-            TextField(
-              controller: contentController,
-              maxLines: 3,
-              decoration: const InputDecoration(labelText: 'Content'),
+            const SizedBox(height: 16),
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(14),
+                border: Border.all(color: Colors.grey.shade300),
+              ),
+              child: TextField(
+                controller: contentController,
+                maxLines: 4,
+                decoration: const InputDecoration(
+                  border: InputBorder.none,
+                  labelText: 'Content',
+                  floatingLabelBehavior: FloatingLabelBehavior.auto,
+                ),
+              ),
             ),
             const SizedBox(height: 16),
             isLoadingCategories
                 ? const Center(child: CircularProgressIndicator())
-                : DropdownButtonFormField<int>(
-                    initialValue: selectedCategoryId,
-                    decoration: const InputDecoration(labelText: 'Category'),
-                    hint: const Text('Pilih kategori'),
-                    items: categories.map((category) {
-                      return DropdownMenuItem<int>(
-                        value: category['id'] as int,
-                        child: Text(category['name'] as String),
-                      );
-                    }).toList(),
-                    onChanged: (value) {
-                      setState(() => selectedCategoryId = value);
-                    },
+                : Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 12),
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(14),
+                      border: Border.all(color: Colors.grey.shade300),
+                    ),
+                    child: DropdownButtonFormField<int>(
+                      initialValue: selectedCategoryId,
+                      decoration: const InputDecoration(
+                        border: InputBorder.none,
+                        labelText: 'Category',
+                        floatingLabelBehavior: FloatingLabelBehavior.auto,
+                      ),
+                      hint: const Text('Pilih kategori'),
+                      items: categories.map((category) {
+                        return DropdownMenuItem<int>(
+                          value: category['id'] as int,
+                          child: Text(category['name'] as String),
+                        );
+                      }).toList(),
+                      onChanged: (value) {
+                        setState(() => selectedCategoryId = value);
+                      },
+                    ),
                   ),
             const SizedBox(height: 24),
-            ElevatedButton(
-              onPressed: isSaving ? null : addArticle,
-              child: isSaving
-                  ? const SizedBox(
-                      height: 18,
-                      width: 18,
-                      child: CircularProgressIndicator(strokeWidth: 2),
-                    )
-                  : const Text('Simpan'),
+            SizedBox(
+              width: double.infinity,
+              height: 52,
+              child: ElevatedButton(
+                onPressed: isSaving ? null : addArticle,
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: const Color(0xFF4C6EF5),
+                  foregroundColor: Colors.white,
+                  elevation: 0,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(14),
+                  ),
+                ),
+                child: isSaving
+                    ? const SizedBox(
+                        height: 18,
+                        width: 18,
+                        child: CircularProgressIndicator(
+                          strokeWidth: 2,
+                          valueColor: AlwaysStoppedAnimation<Color>(
+                            Colors.white,
+                          ),
+                        ),
+                      )
+                    : const Text(
+                        'Simpan',
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+              ),
             ),
           ],
         ),

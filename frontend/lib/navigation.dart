@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'homepage.dart';
 import 'add_article.dart';
-import 'categories.dart';
-import 'profile.dart';
-import 'search_page.dart';
+import 'misc_pages.dart';
 
 class Navigation extends StatefulWidget {
   const Navigation({super.key});

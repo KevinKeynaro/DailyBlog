@@ -51,10 +51,10 @@ app.get('/api/articles', async (req, res) => {
   try {
     const [rows] = await pool.query(
       `select article.id, article.title, article.content, article.category_id,
-              categories.name as category, article.created_at, article.updated_at
-       from article
-       join categories on article.category_id = categories.id
-       order by article.id asc`
+      categories.name as category, article.created_at, article.updated_at
+      from article
+      join categories on article.category_id = categories.id
+      order by article.id asc`
     );
     res.status(200).json({
       message: "berhasil fetch articles",
