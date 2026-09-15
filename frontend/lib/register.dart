@@ -14,6 +14,32 @@ class _RegisterPageState extends State<RegisterPage> {
   bool showPassword = false;
   bool showConfirmPassword = false;
 
+  InputDecoration _inputDecoration({
+    required String label,
+    required String hint,
+    required IconData icon,
+    Widget? suffixIcon,
+  }) {
+    return InputDecoration(
+      labelText: label,
+      hintText: hint,
+      prefixIcon: Icon(icon, color: Colors.grey.shade600),
+      suffixIcon: suffixIcon,
+      filled: true,
+      fillColor: Colors.grey[50],
+      contentPadding: const EdgeInsets.symmetric(horizontal: 18, vertical: 18),
+      enabledBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(14),
+        borderSide: BorderSide(color: Colors.grey.shade300),
+      ),
+      focusedBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(14),
+        borderSide: const BorderSide(color: Color(0xFF4C6EF5), width: 1.5),
+      ),
+      labelStyle: TextStyle(color: Colors.grey.shade600),
+    );
+  }
+
   void _goToNavigation() {
     Navigator.push(
       context,
@@ -46,24 +72,29 @@ class _RegisterPageState extends State<RegisterPage> {
                   ),
                   const SizedBox(height: 36),
                   TextField(
-                    decoration: const InputDecoration(
-                      labelText: 'Full Name',
-                      hintText: 'Your name',
+                    textCapitalization: TextCapitalization.words,
+                    decoration: _inputDecoration(
+                      label: 'Full Name',
+                      hint: 'Your name',
+                      icon: Icons.person_outline,
                     ),
                   ),
                   const SizedBox(height: 18),
                   TextField(
-                    decoration: const InputDecoration(
-                      labelText: 'Email',
-                      hintText: 'you@example.com',
+                    keyboardType: TextInputType.emailAddress,
+                    decoration: _inputDecoration(
+                      label: 'Email',
+                      hint: 'you@example.com',
+                      icon: Icons.mail_outline,
                     ),
                   ),
                   const SizedBox(height: 18),
                   TextField(
                     obscureText: !showPassword,
-                    decoration: InputDecoration(
-                      labelText: 'Password',
-                      hintText: 'Create password',
+                    decoration: _inputDecoration(
+                      label: 'Password',
+                      hint: 'Create password',
+                      icon: Icons.lock_outline,
                       suffixIcon: IconButton(
                         onPressed: () {
                           setState(() {
@@ -74,6 +105,7 @@ class _RegisterPageState extends State<RegisterPage> {
                           showPassword
                               ? Icons.visibility_outlined
                               : Icons.visibility_off_outlined,
+                          color: Colors.grey.shade600,
                         ),
                       ),
                     ),
@@ -81,9 +113,10 @@ class _RegisterPageState extends State<RegisterPage> {
                   const SizedBox(height: 18),
                   TextField(
                     obscureText: !showConfirmPassword,
-                    decoration: InputDecoration(
-                      labelText: 'Confirm Password',
-                      hintText: 'Repeat your password',
+                    decoration: _inputDecoration(
+                      label: 'Confirm Password',
+                      hint: 'Repeat your password',
+                      icon: Icons.lock_reset_outlined,
                       suffixIcon: IconButton(
                         onPressed: () {
                           setState(() {
@@ -94,6 +127,7 @@ class _RegisterPageState extends State<RegisterPage> {
                           showConfirmPassword
                               ? Icons.visibility_outlined
                               : Icons.visibility_off_outlined,
+                          color: Colors.grey.shade600,
                         ),
                       ),
                     ),
